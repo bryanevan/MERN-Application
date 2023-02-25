@@ -67,3 +67,8 @@ Timestamp: Wed Feb 15 2023 23:11:35 GMT-1000 (Hawaii-Aleutian Standard Time)
 URL: /favicon.ico
 Timestamp: Wed Feb 15 2023 23:11:35 GMT-1000 (Hawaii-Aleutian Standard Time)
 
+::1 - - [25/Feb/2023:03:15:29 +0000] "GET / HTTP/1.1" 200 20
+::1 - - [25/Feb/2023:03:15:30 +0000] "GET /favicon.ico HTTP/1.1" 404 150
+::1 - - [25/Feb/2023:03:17:39 +0000] "GET /documentation HTTP/1.1" 200 29
+::1 - - [25/Feb/2023:03:19:25 +0000] "GET /movies HTTP/1.1" 200 544
+::1 - - [25/Feb/2023:03:20:38 +0000] "GET / HTTP/1.1" 304 -

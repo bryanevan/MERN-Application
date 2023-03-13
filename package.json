@@ -2,31 +2,34 @@
   "name": "movie_api",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bryanevan/Node.js_API.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "BryanEvan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/bryanevan/Node.js_API/issues"
   },
   "homepage": "https://github.com/bryanevan/Node.js_API#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "express": "^4.18.2",
     "lodash": "^4.17.21",
+    "mongoose": "^7.0.1",
     "morgan": "^1.10.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "eslint": "^8.31.0",
     "nodemon": "^2.0.20"
   }
 }

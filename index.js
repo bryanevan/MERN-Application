@@ -1,4 +1,4 @@
-//requirements
+//requirements + frameworks
 const express = require('express'),
   morgan = require('morgan'),
   fs = require('fs'),
@@ -36,7 +36,7 @@ app.get('/documentation', (req, res) => {
   res.sendFile('public/Documentation.html', {root: __dirname});
 });
 
-app.get('/users',  (req, res) => {
+app.get('/users', passport.authenticate('jwt',{session:false}), (req, res) => {
   Users.find()
     .then((users) => {
       res.status(201).json(users);
@@ -130,7 +130,7 @@ app.post('/users', (req, res) => {
     });
 });
 
-app.post('/users/:Username/movies/:id',(req, res) => {
+app.post('/users/:Username/movies/:id', passport.authenticate('jwt',{session:false}),(req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username },
                           {$addToSet:{favoriteMovieList: req.params.id}},
                           req.body,
@@ -145,7 +145,7 @@ app.post('/users/:Username/movies/:id',(req, res) => {
 
 
 //UPDATE
-app.put('/users/:Username', (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt',{session:false}), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
     {
       Username: req.body.Username,
@@ -180,7 +180,7 @@ app.delete('/users/:Username', (req, res) => {
     });
 });
 
-app.delete('/users/:Username/movies/:id', (req, res) => {
+app.delete('/users/:Username/movies/:id', passport.authenticate('jwt',{session:false}), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username },
                           {$pull:{favoriteMovieList: req.params.id}},
                           req.body,

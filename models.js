@@ -33,7 +33,7 @@ let userSchema = mongoose.Schema({
 //     return bcrypt.compareSync(password, this.Password);
 // };
 
-// creation of models
+// create models
 let Movie = mongoose.model('Movie', movieSchema);
 let User = mongoose.model('User', userSchema);
 

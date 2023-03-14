@@ -8,19 +8,23 @@ const express = require('express'),
   Models = require('./models.js'),
   bodyParser = require('body-parser');
 
-//import + database 
+//import database & connect
 const Movies = Models.Movie;
 const Users = Models.User;
 mongoose.connect('mongodb://localhost:27017/myCinema', { useNewUrlParser: true, useUnifiedTopology: true });
 
-// morgan logger, express, body-parser
+// morgan logger, app, body-parser
 const app = express();
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), { flags: 'a' });
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan("combined", { stream: accessLogStream }));
+app.use(morgan('combined', { stream: accessLogStream }));
 
+//auth
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
 
 //READ
 app.get('/', (req, res) => {
@@ -32,7 +36,7 @@ app.get('/documentation', (req, res) => {
   res.sendFile('public/Documentation.html', {root: __dirname});
 });
 
-app.get('/users', (req, res) => {
+app.get('/users',  (req, res) => {
   Users.find()
     .then((users) => {
       res.status(201).json(users);
@@ -43,7 +47,7 @@ app.get('/users', (req, res) => {
     });
 });
 
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt',{session:false}), (req, res) => {
   Movies.find({ Movies: req.params.Movies })
     .then((movies) => {
       res.json(movies);
@@ -54,7 +58,7 @@ app.get('/movies', (req, res) => {
     });
 });
 
-app.get('/users/:Username', (req, res) => {
+app.get('/users/:Username', passport.authenticate('jwt',{session:false}), (req, res) => {
   Users.findOne({ Username: req.params.Username })
     .then((user) => {
       res.json(user);
@@ -65,7 +69,7 @@ app.get('/users/:Username', (req, res) => {
     });
 });
 
-app.get('/movies/:Title', (req, res) => {
+app.get('/movies/:Title', passport.authenticate('jwt',{session:false}), (req, res) => {
   Movies.findOne({ Title: req.params.Title })
     .then((movies) => {
       res.json(movies);
@@ -76,7 +80,7 @@ app.get('/movies/:Title', (req, res) => {
     });
 });
 
-app.get('/movies/genre/:genreName', (req, res) => {
+app.get('/movies/genre/:genreName', passport.authenticate('jwt',{session:false}), (req, res) => {
   Movies.findOne({ 'Genre.Name': req.params.genreName })
     .then((movies) => {
       res.json(movies.Genre);
@@ -87,7 +91,7 @@ app.get('/movies/genre/:genreName', (req, res) => {
     });
 });
 
-app.get('/movies/director/:directorName', (req, res) => {
+app.get('/movies/director/:directorName', passport.authenticate('jwt',{session:false}), (req, res) => {
   Movies.findOne({ 'Director.Name': req.params.directorName })
     .then((movies) => {
       res.json(movies.Director);
@@ -126,7 +130,7 @@ app.post('/users', (req, res) => {
     });
 });
 
-app.post('/users/:Username/movies/:id', (req, res) => {
+app.post('/users/:Username/movies/:id',(req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username },
                           {$addToSet:{favoriteMovieList: req.params.id}},
                           req.body,

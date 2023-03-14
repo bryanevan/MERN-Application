@@ -8,7 +8,7 @@ const express = require('express'),
   Models = require('./models.js'),
   bodyParser = require('body-parser');
 
-//database
+//import + database 
 const Movies = Models.Movie;
 const Users = Models.User;
 mongoose.connect('mongodb://localhost:27017/myCinema', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -126,18 +126,16 @@ app.post('/users', (req, res) => {
     });
 });
 
-app.post('/users/:Username/movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username }, {
-     $addToSet: { favoriteMovieList: req.params.MovieID }
-   },
-   { new:true },  // This line makes sure that the updated document is returned
-  (err, updatedUser) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    } else {
-      res.json(updatedUser);
-    }
+app.post('/users/:Username/movies/:id', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username },
+                          {$addToSet:{favoriteMovieList: req.params.id}},
+                          req.body,
+                          { new: true })
+  .then((updatedUser) => {
+    res.status(200).json(updatedUser);
+  })
+  .catch(error => {
+    res.status(500).json({ error: error.message });
   });
 });
 
@@ -152,14 +150,12 @@ app.put('/users/:Username', (req, res) => {
       Birthday: req.body.Birthday
     }
   },
-  { new: true },
-  (err, updatedUser) => {
-    if(err) {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    } else {
-      res.json(updatedUser);
-    }
+  { new: true })
+  .then((updatedUser) => {
+    res.status(200).json(updatedUser);
+  })
+  .catch(error => {
+    res.status(500).json({ error: error.message });
   });
 });
 
@@ -180,18 +176,16 @@ app.delete('/users/:Username', (req, res) => {
     });
 });
 
-app.delete('/users/:Username/movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username }, {
-     $pull: { favoriteMovieList: req.params.MovieID }
-   },
-   { new: true },
-  (err, updatedUser) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    } else {
-      res.json(updatedUser);
-    }
+app.delete('/users/:Username/movies/:id', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username },
+                          {$pull:{favoriteMovieList: req.params.id}},
+                          req.body,
+                          { new: true })
+  .then((updatedUser) => {
+    res.status(200).json(updatedUser);
+  })
+  .catch(error => {
+    res.status(500).json({ error: error.message });
   });
 });
 

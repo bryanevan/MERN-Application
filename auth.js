@@ -9,10 +9,11 @@ let generateJWTToken = (user) => {
     expiresIn: '7d', // expires 7d
     algorithm: 'HS256' // 256 bit encryption
   });
-}
+};
 
-//POST login endpoint
+//POST login endpoint | create jwt token
 module.exports = (router) => {
+  router.use(passport.initialize());
   router.post('/login', (req, res) => {
     passport.authenticate('local', { session: false }, (error, user, info) => {
       if (error || !user) {
@@ -30,4 +31,4 @@ module.exports = (router) => {
       });
     })(req, res);
   });
-}
+};

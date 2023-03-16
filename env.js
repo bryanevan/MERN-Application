@@ -1,1 +1,0 @@
-CONNECTION_URI="mongodb+srv://bryanevan:bilet1@mycinemadb.2ow9ooy.mongodb.net/myCinemaDB?retryWrites=true&w=majority"

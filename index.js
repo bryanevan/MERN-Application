@@ -8,26 +8,52 @@ const express = require('express'),
   Models = require('./models.js'),
   bodyParser = require('body-parser');
 
-//import schemas(models) & connect
+//Models
 const Movies = Models.Movie;
 const Users = Models.User;
-mongoose.connect('mongodb://localhost:27017/myCinema', { useNewUrlParser: true, useUnifiedTopology: true });
+
+const {check, validationResult} = require('express-validator');
+
+//Mongoose connection to db for CRUD
+//local connection _ for testing:
+//mongoose.connect('mongodb://localhost:27017/myCinema', { useNewUrlParser: true, useUnifiedTopology: true });
+//Atlas:
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // morgan logger, app, body-parser
 const app = express();
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), { flags: 'a' });
-app.use(express.static('public'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan('common', { stream: accessLogStream }));
 
-//CORS, auth, passport
+//CORS
 const cors = require('cors');
-app.use(cors());
+let allowedOrigins = [
+  'http://localhost:8080',
+  'http://localhost:27017', 
+  'https://mycinema.herokuapp.com/'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+      let message = 'The CORS policy for this application doesn/t allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+}));
+
+//Middleware
+app.use(express.static('public')); //server static files
+app.use(morgan('common', { stream: accessLogStream })); //log requests in terminal
+app.use(bodyParser.json()); //use body-parser
+app.use(bodyParser.urlencoded({ extended: true })); //...encoded
+
+//import auth endpoints after body-parser
 let auth = require('./auth')(app);
+
+//require passport for auth
 const passport = require('passport');
 require('./passport');
-
 
 //READ
 app.get('/', (req, res) => {
@@ -39,7 +65,7 @@ app.get('/documentation', (req, res) => {
   res.sendFile('public/Documentation.html', {root: __dirname});
 });
 
-app.get('/users', (req, res) => {
+app.get('/users', passport.authenticate('jwt',{session:false}), (req, res) => {
   Users.find()
     .then((users) => {
       res.status(201).json(users);
@@ -147,7 +173,7 @@ app.post('/users',
       });
   });
 
-app.post('/users/:Username/movies/:id', passport.authenticate('jwt',{session:false}),(req, res) => {
+app.post('/users/:Username/movies/:id', passport.authenticate('jwt',{session:false}), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username },
                           {$addToSet:{favoriteMovieList: req.params.id}},
                           req.body,
@@ -182,7 +208,7 @@ app.put('/users/:Username', passport.authenticate('jwt',{session:false}), (req, 
 
 
 //DELTE
-app.delete('/users/:Username', (req, res) => {
+app.delete('/users/:Username', passport.authenticate('jwt',{session:false}), (req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username })
     .then((user) => {
       if (!user) {
@@ -214,7 +240,7 @@ app.delete('/users/:Username/movies/:id', passport.authenticate('jwt',{session:f
 // Morgan middleware error handling function
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send('Error');
+  res.status(500).send('Uh oh, something went wrong');
 });
 //variable port listening
 const port = process.env.PORT || 8080;

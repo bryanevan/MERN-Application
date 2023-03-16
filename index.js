@@ -17,8 +17,10 @@ const {check, validationResult} = require('express-validator');
 //Mongoose connection to db for CRUD
 //local connection _ for testing:
 //mongoose.connect('mongodb://localhost:27017/myCinema', { useNewUrlParser: true, useUnifiedTopology: true });
-//Atlas:
+//Atlas & Heroku connection:
+require('dotenv').config({path: path.resolve(__dirname, './env.js')});
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+console.log(process.env.CONNECTION_URI);
 
 // morgan logger, app, body-parser
 const app = express();

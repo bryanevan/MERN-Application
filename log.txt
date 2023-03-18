@@ -743,3 +743,6 @@ Timestamp: Wed Feb 15 2023 23:11:35 GMT-1000 (Hawaii-Aleutian Standard Time)
 ::1 - - [15/Mar/2023:11:08:44 +0000] "POST /login?Username=admin&Password=root HTTP/1.1" 400 41
 ::1 - - [15/Mar/2023:11:10:01 +0000] "POST /login?Username=admin&Password=root HTTP/1.1" 400 41
 ::1 - - [15/Mar/2023:11:14:28 +0000] "POST /login?Username=admin&Password=root HTTP/1.1" 400 41
+127.0.0.1 - - [16/Mar/2023:09:35:55 +0000] "POST /users HTTP/1.1" 400 19
+127.0.0.1 - - [16/Mar/2023:09:37:56 +0000] "GET /users HTTP/1.1" 401 -
+127.0.0.1 - - [16/Mar/2023:09:38:32 +0000] "POST /users?Username=admin&Password=root HTTP/1.1" 500 136

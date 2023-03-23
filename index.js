@@ -78,7 +78,7 @@ app.get('/users', passport.authenticate('jwt',{session:false}), (req, res) => {
     });
 });
 
-app.get('/movies', passport.authenticate('jwt',{session:false}), (req, res) => {
+app.get('/movies', (req, res) => {
   Movies.find({ Movies: req.params.Movies })
     .then((movies) => {
       res.json(movies);

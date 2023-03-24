@@ -15,7 +15,7 @@ let movie1 = {
         Birthyear: "1961",
         Deathyear: "present",
     },
-    imageUrl: "https://pixabay.com/images/id-2021410/",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/be/The_Lord_of_the_Rings_-_The_Return_of_the_King_%282003%29.jpg",
     year: "2003",
     featured: "yes",
 }
@@ -34,7 +34,7 @@ let movie2 = {
         Birthyear: "1970",
         Deathyear: "present",
     },
-    imageUrl: "https://pixabay.com/images/id-3265473/",
+    imageUrl: "https://www.dvdsreleasedates.com/posters/800/I/Inception-movie-poster.jpg",
     year: "2010",
     featured: "yes",
 }
@@ -53,7 +53,7 @@ let movie3 = {
         Birthyear: "1941",
         Deathyear: "present",
     },
-    imageUrl: "https://pixabay.com/images/id-1754734/",
+    imageUrl: "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/412B0Cvv2GL._AC_UF894,1000_QL80_.jpg",
     year: "2001",
     featured: "yes",
 }
@@ -72,7 +72,7 @@ let movie4 = {
         Birthyear: "1970",
         Deathyear: "present",
     },
-    imageUrl: "https://pixabay.com/images/id-233171/",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/en/d/d2/Prestige_poster.jpg",
     year: "2006",
     featured: "yes",
 }
@@ -91,7 +91,7 @@ let movie5 = {
         Birthyear: "1964",
         Deathyear: "present",
     },
-    imageUrl: "https://images.app.goo.gl/Q6KMpFhvACebtH2PA",
+    imageUrl: "https://lumiere-a.akamaihd.net/v1/images/p_piratesofthecaribbean_thecurseoftheblackpearl_19642_d1ba8e66.jpeg",
     year: "2003",
     featured: "yes",
 }
@@ -110,7 +110,7 @@ let movie6 = {
         Birthyear: "1967",
         Deathyear: "present",
     },
-    imageUrl: "https://images.app.goo.gl/Jx5ymfdFqh7rP6U67",
+    imageUrl: "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71dN0ekpUqL._AC_UF894,1000_QL80_.jpg",
     year: "2017",
     featured: "yes",
 }
@@ -129,7 +129,7 @@ let movie6 = {
         Birthyear: "1962",
         Deathyear: "present",
     },
-    imageUrl: "https://images.app.goo.gl/MdL5YuL9EF1sfh7B9",
+    imageUrl: "https://media.posterlounge.com/images/l/1900414.jpg",
     year: "2014",
     featured: "yes",
 }
@@ -148,7 +148,7 @@ let movie8 = {
         Birthyear: "1889",
         Deathyear: "1949",
     },
-    imageUrl: "https://images.app.goo.gl/MdL5YuL9EF1sfh7B9",
+    imageUrl: "https://cdn.shopify.com/s/files/1/1057/4964/products/Gone-With-the-Wind-Vintage-Movie-Poster-Original-1-Sheet-27x41_a4b03463-4d56-4ba0-9370-08af7f40d9ac.jpg?v=1639623969",
     year:"1939",
     featured: "yes",
 }
@@ -167,7 +167,7 @@ let movie9 = {
         Birthyear: "1944",
         Deathyear: "present",
     },
-    imageUrl: "https://images.app.goo.gl/npzmKEErmkW571eM7",
+    imageUrl: "https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71r3KD7BatL._AC_UF894,1000_QL80_.jpg",
     year: "1977",
     featured: "yes",
 }
@@ -187,7 +187,7 @@ let movie10 = {
         Birthyear: "1954",
         Deathyear: "present",
     },
-    imageUrl: "https://images.app.goo.gl/vLw2cKVqEzEZYDto7",
+    imageUrl: "https://i.ebayimg.com/images/g/ycEAAOSwQNhjkAk6/s-l1600.jpg",
     year: "2022",
     featured: "yes",
 }

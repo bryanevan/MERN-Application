@@ -268,7 +268,7 @@ let movie14 = {
 
 let movie15 = {
     Title: "Fight Club", 
-    Description: "It is based on the 1996 novel of the same name by Chuck Palahniuk. Norton plays the unnamed narrator, who is discontented with his white-collar job. He forms a "fight club" with soap salesman Tyler Durden (Pitt), and becomes embroiled in a relationship with a mysterious woman, Marla Singer (Bonham Carter).",
+    Description: "It is based on the 1996 novel of the same name by Chuck Palahniuk. Norton plays the unnamed narrator, who is discontented with his white-collar job. He forms a fight club with soap salesman Tyler Durden (Pitt), and becomes embroiled in a relationship with a mysterious woman, Marla Singer (Bonham Carter).",
     Genre: {
         Name: "thriller",
         Description: "Thriller is a genre of fiction with numerous, often overlapping, subgenres, including crime, horror and detective fiction.",

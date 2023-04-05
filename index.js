@@ -14,9 +14,10 @@ const Users = Models.User;
 
 const {check, validationResult} = require('express-validator');
 
-//Mongoose connection to db for CRUD
+//Mongoose connection to db for CRUD ops
 //local connection _ for testing:
 //mongoose.connect('mongodb://localhost:27017/myCinema', { useNewUrlParser: true, useUnifiedTopology: true });
+
 //Atlas & Heroku connection:
 require('dotenv').config({path: path.resolve(__dirname, './env/env.js')});
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -28,22 +29,24 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), { 
 
 //CORS
 const cors = require('cors');
-// let allowedOrigins = [
-//   'http://localhost:8080',
-//   'http://localhost:27017',
-//   'http://localhost:1234',
-//   'https://mycinema.herokuapp.com/'];
+let allowedOrigins = [
+  'http://localhost:8080',
+  'http://localhost:27017',
+  'http://localhost:1234',
+  'http://localhost:52090',
+  'https://mycinema.herokuapp.com/',
+  'https://my-cinema808.netlify.app'];
 
 app.use(cors());
-//   origin: (origin, callback) => {
-//     if(!origin) return callback(null, true);
-//     if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
-//       let message = 'The CORS policy for this application doesn/t allow access from origin ' + origin;
-//       return callback(new Error(message ), false);
-//     }
-//     return callback(null, true);
-//   }
-// }));
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+      let message = 'The CORS policy for this application doesn/t allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+
 
 //Middleware
 app.use(express.static('public')); //server static files

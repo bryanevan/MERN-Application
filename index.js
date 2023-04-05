@@ -34,19 +34,20 @@ let allowedOrigins = [
   'http://localhost:27017',
   'http://localhost:1234',
   'http://localhost:52090',
+  'http://localhost:64003',
   'https://mycinema.herokuapp.com/',
   'https://my-cinema808.netlify.app'];
 
-app.use(cors());
-  origin: (origin, callback) => {
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
-      let message = 'The CORS policy for this application doesn/t allow access from origin ' + origin;
-      return callback(new Error(message ), false);
+  app.use(cors({
+    origin: (origin, callback) => {
+      if(!origin) return callback(null, true);
+      if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+        let message = 'The CORS policy for this application doesn/t allow access from origin ' + origin;
+        return callback(new Error(message ), false);
+      }
+      return callback(null, true);
     }
-    return callback(null, true);
-  }
-
+  }));
 
 //Middleware
 app.use(express.static('public')); //server static files

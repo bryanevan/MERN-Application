@@ -6,7 +6,7 @@ Users will be able to sign up, update their personal information, and create a l
 
 ## Built With
 - JavaScript and HTML
-- MERN (MongoDB, Express, React, and Node.js) stack, REST architecture
+- Stack: (MongoDB, Express, and Node.js), REST architecture
 - Deployed to [Heroku](https://www.heroku.com/)
 - Database cloud on [MongoDB Atlas ](https://www.mongodb.com/atlas/database)
 

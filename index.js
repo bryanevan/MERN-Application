@@ -36,7 +36,7 @@ let allowedOrigins = [
   'http://localhost:52090',
   'http://localhost:64003',
   'http://localhost:4200',
-  'https://mycinema.herokuapp.com/',
+  'https://mycinema.herokuapp.com',
   'https://my-cinema808.netlify.app',
   'https://bryanevan.github.io/myFlix_Angular'];
 

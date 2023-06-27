@@ -38,7 +38,7 @@ let allowedOrigins = [
   'http://localhost:4200',
   'https://mycinema.herokuapp.com',
   'https://my-cinema808.netlify.app',
-  'https://bryanevan.github.io/myFlix_Angular'];
+  'https://bryanevan.github.io'];
 
   app.use(cors({
     origin: (origin, callback) => {

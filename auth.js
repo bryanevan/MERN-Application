@@ -11,7 +11,9 @@ let generateJWTToken = (user) => {
   });
 };
 
-//POST login endpoint | create jwt token
+/**
+ * POST login endpoint | create jwt token
+ */
 module.exports = (router) => {
   router.use(passport.initialize());
   router.post('/login', (req, res) => {

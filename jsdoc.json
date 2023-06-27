@@ -1,0 +1,22 @@
+
+{
+"plugins": ["plugins/markdown"],
+"recurseDepth": 10,
+"source": {
+    "include": ["auth.js",
+                "index.js",
+                "models.js",
+                "passport.js"],
+    "includePattern": ".js$",
+    "excludePattern": "(node_modules/|docs|env|db|public)"
+},
+"templates": {
+    "cleverLinks": true,
+    "monospaceLinks": true
+},
+"opts": {
+    "destination": "./jsdoc",
+    "recurse": true,
+    "readme": "./readme.md"
+}
+}

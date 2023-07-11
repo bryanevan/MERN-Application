@@ -16,4 +16,4 @@ Users will be able to sign up, update their personal information, and create a l
 
 ## Live Demo
 Check it out [here](https://mycinema.herokuapp.com/).
-- documention URL is: https://mycinema.herokuapp.com/documentation.html
+- documention URL: https://mycinema.herokuapp.com/documentation.html
